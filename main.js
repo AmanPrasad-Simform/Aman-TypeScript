@@ -1,3 +1,4 @@
+"use strict";
 // function palindrome(num) {
 //     let str = num.toString().toLowerCase();
 //     let stri = str.split("").reverse().join("");
