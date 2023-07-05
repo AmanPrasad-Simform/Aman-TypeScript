@@ -88,3 +88,44 @@
 //         console.log(this.student + " Good");
 //     }
 // }
+// interface Person {
+//     names: string;
+//     age: number;
+// }
+// interface Person {
+//     gender: boolean;
+// }
+//LookUp types
+// type FullName = keyof Person;
+// const sar: FullName = "namess"; // Correct assignment
+// function calcAge(age: number): Person["names"] {
+//     return "The born year is  : " + (2023 - age);
+// }
+// console.log(calcAge(21));
+// -----Mapped types------
+// type Person = {
+//     name: string;
+//     age: number;
+//     // dob: number;
+// };
+// type PersonReadOnly<T> = {
+//     readonly [key in keyof T]: T[key];
+// };
+// const person: Partial <PersonReadOnly<Person>> = {
+//     name: "shyam",
+//     age: 21,
+// };
+// person.age = 11;
+/// <reference path="./main.ts" />
+var NameSpace;
+(function (NameSpace) {
+    class Namespace1 extends NameSpace.Namespace2 {
+        getName() {
+            return this.name;
+        }
+    }
+    NameSpace.Namespace1 = Namespace1;
+})(NameSpace || (NameSpace = {}));
+const new1 = new NameSpace.Namespace1();
+new1.setName("Sunny");
+console.log(new1.getName());

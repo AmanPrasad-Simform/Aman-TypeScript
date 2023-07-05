@@ -408,3 +408,13 @@
 // const variable = "";
 // const vari = variable ?? "AA";
 // console.log(vari);
+var NameSpace;
+(function (NameSpace) {
+    class Namespace2 {
+        setName(name) {
+            return (this.name = name);
+        }
+    }
+    NameSpace.Namespace2 = Namespace2;
+    new Namespace2().setName("amananna");
+})(NameSpace || (NameSpace = {}));

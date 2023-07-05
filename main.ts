@@ -478,3 +478,13 @@
 // const variable = "";
 // const vari = variable ?? "AA";
 // console.log(vari);
+
+namespace NameSpace {
+    export class Namespace2 {
+        name;
+        setName(name: string) {
+            return (this.name = name);
+        }
+    }
+    new Namespace2().setName("amananna");
+}
