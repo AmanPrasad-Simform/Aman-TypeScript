@@ -6,9 +6,11 @@
 :root {
     --primary: rgb(242, 242, 242);
     --secondary: rgb(247, 247, 248);
-    --number-grey: rgb(252, 252, 252);
     --blue: rgb(145, 193, 231);
     --button-active: rgb(221, 221, 221);
+}
+#btnhandler button:hover {
+    background-color: var(--primary);
 }
 main {
     display: flex;
@@ -18,9 +20,7 @@ main {
 .container {
     margin: 10vh 0;
     background-color: var(--primary);
-    height: fit-content;
     padding: 5px;
-    width: fit-content;
 }
 
 .input {
@@ -34,7 +34,6 @@ main {
     outline: none;
     font-size: 30px;
     font-weight: 600;
-    padding: 0px 8px;
     background-color: var(--primary);
 }
 
@@ -123,7 +122,7 @@ main {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: var(--primary);
     min-width: 125px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -134,7 +133,7 @@ main {
     padding: 8px 5px;
     text-decoration: none;
     min-width: 125px;
-    border: #f1f1f1;
+    border: var(--primary);
 }
 
 .dropdown:hover .dropdown-content {

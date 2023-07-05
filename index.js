@@ -1,16 +1,12 @@
-const display = document.getElementById("input") as HTMLInputElement;
-interface displayArray {
-    display: string[];
-    operator: string[];
-}
-let data: displayArray = {
-    display: [], //display is an array to display in the input screen
+"use strict";
+const display = document.getElementById("input");
+let data = {
+    display: [],
     operator: [], // operator is an array to perform operation
 };
-let memory: string = "";
-
+let memory = "";
 //Radian to Degree converter:
-const radian = document.getElementById("radian")! as HTMLElement;
+const radian = document.getElementById("radian");
 const initialText = radian.textContent;
 const newText = "DEG";
 let rdFlag = true;
@@ -23,15 +19,13 @@ radian.addEventListener("click", () => {
         rdFlag = !rdFlag;
     }
 });
-
 // Inverse trigno functionalities
-const toggler = document.getElementById("toggler")! as HTMLElement;
+const toggler = document.getElementById("toggler");
 const initialBtn = toggler.textContent;
 const newBtn = "inv";
 let togFlag = true;
 let trignometry = document.querySelectorAll("#trignometries");
 let inverseTrignometry = document.querySelectorAll("#inverseTrignometries");
-
 toggler.addEventListener("click", () => {
     if (togFlag == true) {
         toggler.textContent = newBtn;
@@ -47,9 +41,8 @@ toggler.addEventListener("click", () => {
         togFlag = !togFlag;
     }
 });
-
 // this function will handle the eventlistner from the html file
-function uiclick(e: { target: { id: string } }) {
+function uiclick(e) {
     if (e.target.id == "equals") {
         evaluate();
     } else if (e.target.id == "backspace") {
@@ -62,7 +55,6 @@ function uiclick(e: { target: { id: string } }) {
         handleClickEvent(e.target.id);
     }
 }
-
 //this function handles the keyboard inputs
 window.addEventListener("keydown", (e) => {
     e.preventDefault();
@@ -74,9 +66,8 @@ window.addEventListener("keydown", (e) => {
         handleClickEvent(e.key);
     }
 });
-
 // Main function to get buttons
-function handleClickEvent(btn: string) {
+function handleClickEvent(btn) {
     let deg = Math.PI / 180;
     let inputString = "";
     let operator = btn;
@@ -143,30 +134,25 @@ function handleClickEvent(btn: string) {
             inputString = "-";
             operator = "-";
             break;
-
         case "toExpo":
             toExpo();
             inputString = "value";
             operator = `Number(${inputString}).toExponential()`; // toExponential() method converts a number into an exponential notation.
             break;
-
         case "MS":
             memory = data.display.join("");
             emptyarray();
             display.value = "";
             break;
-
         case "MR":
             data.operator.push(memory);
             data.display.push(memory);
             display.value = data.display.join("");
             break;
-
         case "MC":
             memory = "";
             display.value = "";
             break;
-
         case "M+":
             memory = String(
                 Number(memory) + Number(eval(data.display.join("")))
@@ -174,7 +160,6 @@ function handleClickEvent(btn: string) {
             display.value = "";
             emptyarray();
             break;
-
         case "M-":
             memory = String(
                 Number(memory) - Number(eval(data.display.join("")))
@@ -182,7 +167,6 @@ function handleClickEvent(btn: string) {
             display.value = "";
             emptyarray();
             break;
-
         case "sin":
             inputString = "sin(";
             if (rdFlag == false) {
@@ -201,7 +185,6 @@ function handleClickEvent(btn: string) {
                 operator = `Math.tan(${deg}*`;
             } else operator = "Math.tan(";
             break;
-
         case "sin-1":
             inputString = "sin-1(";
             if (rdFlag == false) {
@@ -220,125 +203,101 @@ function handleClickEvent(btn: string) {
                 operator = `Math.atan(${deg}*`;
             } else operator = "Math.atan(";
             break;
-
         case "floor":
             inputString = "floor(";
             operator = "Math.floor(";
             break;
-
         case "ceil":
             inputString = "ceil(";
             operator = "Math.ceil(";
             break;
-
         case "rand":
             inputString = `Math.random() * 10`; // Random value between 1 to 10
             operator = `${inputString}`;
             break;
-
         case "power2":
             inputString = "^2";
             operator = "**2";
             break;
-
         case "pie":
             inputString = `${inputString}π`;
             operator = "Math.PI";
             break;
-
         case "e":
             inputString = `${inputString}e`;
             operator = "*Math.E";
             break;
-
         case "square":
             inputString = "^2";
             operator = "**2";
             break;
-
         case "inverse":
             inputString = "1/(";
             operator = "1/(";
             break;
-
         case "absolute":
             inputString = "abs(";
             operator = "Math.abs(";
             break;
-
         case "exp":
             inputString = `${inputString}E`;
             operator = "E";
             break;
-
         case "mod":
             inputString = "%";
             operator = "%";
             break;
-
         case "sqrt":
             inputString = "√(";
             operator = "Math.sqrt(";
             break;
-
         case "(":
             inputString = "(";
             operator = "(";
             break;
-
         case ")":
             inputString = ")";
             operator = ")";
             break;
-
         case "factorial":
             inputString = "!";
             operator = String(fact(Number(data.operator.pop())));
             break;
-
         case "divide":
         case "/":
             inputString = "/";
             operator = "/";
             break;
-
         case "xpowery":
             inputString = "^";
             operator = "**";
             break;
-
         case "multiply":
         case "*":
             inputString = "*";
             operator = "*";
             break;
-
         case "power10":
             inputString = "10^";
             operator = "10**";
             break;
-
         case "log":
             inputString = `log(${inputString}`;
             operator = "Math.log10(";
             break;
-
         case "ln":
             inputString = `ln(${inputString}`;
             operator = "Math.log(";
             break;
-
         case "plus_minus":
             inputString = "-";
             operator = "*-1";
             break;
-
         default:
             inputString = "";
             operator = "";
             break;
     }
-
     if (inputString == "" && operator == "") {
         return;
     }
@@ -346,42 +305,45 @@ function handleClickEvent(btn: string) {
     data.display.push(inputString);
     display.value = data.display.join("");
 }
-
 function evaluate() {
-    let value = eval(data.operator.join(""));
-    data.operator = [value];
-    data.display = [value];
-    display.value = value;
-    return;
+    try {
+        if (data.display == "") {
+            return;
+        }
+        let value = eval(data.operator.join(""));
+        data.operator = [value];
+        data.display = [value];
+        display.value = value;
+        return;
+    } catch (e) {
+        data.operator = [];
+        data.display = [];
+        display.value = "";
+        alert("Invalid Input!");
+    }
 }
-
 function backspace() {
     data.display.pop();
     data.operator.pop();
     display.value = data.display.join("");
 }
-
 function allClear() {
     emptyarray();
     display.value = "";
     return;
 }
-
 // Define helper functions::
-
 function emptyarray() {
     data.operator = [];
     data.display = [];
     return;
 }
-
-function fact(value: number) {
+function fact(value) {
     for (let i = value - 1; i >= 1; i--) {
         value = value * i;
     }
     return value;
 }
-
 function toExpo() {
     const num = data.operator.join("");
     const value = Number(num).toExponential();
@@ -389,7 +351,6 @@ function toExpo() {
     data.display = [value];
     display.value = value;
 }
-
 function plusminus() {
     const num = data.display.join("");
     const value = +num * -1;
